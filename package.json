@@ -3,13 +3,16 @@
   "displayName": "code bricklayer",
   "description": "",
   "version": "0.0.1",
+  "publisher": "siyuanliu",
   "engines": {
     "vscode": "^1.76.0"
   },
   "categories": [
     "Other"
   ],
-  "activationEvents": [],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
   "main": "./out/extension.js",
   "contributes": {
     "commands": [

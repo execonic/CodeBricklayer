@@ -9,6 +9,12 @@
 import { EOF } from "dns";
 import { link } from "fs";
 
+const reLine = /.*(\r)*\n/;
+const reArchHead = /\.\.\./;
+const reArchTail = /\.\.\./;
+const reBrickHead = /---/;
+const reBrickTail = /---/;
+
 export class CodeBricklayer {
 
 	srcContent : string;
@@ -16,27 +22,33 @@ export class CodeBricklayer {
 	relay : string;
 	codeArch : string;
 
-	constructor(src : string) {
-		this.srcContent = src;
+	constructor() {
+		this.srcContent = "";
 		this.dstContent = "";
-		this.relay = src;
+		this.relay = "";
 		this.codeArch = "";
 	}
 
+	pushBluePrint(src :string) {
+		this.srcContent = src;
+		this.relay = src;
+		this.codeArch = "";
+		this.dstContent = "";
+	}
+
 	readline() : string {
-		let line = this.relay.match(/.*\n/);
+		let line = this.relay.match(reLine);
 
 		if (line === null) {
 			return EOF;
 		}
 
-		this.relay = this.relay.replace(/.*\n/, "");
+		this.relay = this.relay.replace(reLine, "");
 		
 		return line[0];
 	}
 
 	archPrase() : void {
-		var reArch = /\.\.\./;
 		var line : string;
 		while (true) {
 			line = this.readline();
@@ -44,7 +56,7 @@ export class CodeBricklayer {
 				return;
 			}
 
-			if (line.match(reArch)) {
+			if (line.match(reArchHead)) {
 				break;
 			}
 		}
@@ -55,7 +67,7 @@ export class CodeBricklayer {
 				break;
 			}
 
-			if (!line.match(reArch)) {
+			if (!line.match(reArchTail)) {
 				this.codeArch += line;
 			} else {
 				break;
@@ -67,7 +79,6 @@ export class CodeBricklayer {
 
 	bricklay() : void {
 		var line : string;
-		var reBrick = /---/;
 		var reCond = /\$<.+?>/g;
 		var separator : string;
 		var match : boolean;
@@ -79,7 +90,7 @@ export class CodeBricklayer {
 				return;
 			}
 
-			if (line.match(reBrick)) {
+			if (line.match(reBrickHead)) {
 				break;
 			}
 		}
@@ -111,7 +122,7 @@ export class CodeBricklayer {
 				break;
 			}
 
-			if (!line.match(reBrick)) {
+			if (!line.match(reBrickTail)) {
 				let bricks = line.split(separator);
 				let num = bricks.length;
 				// console.log(bricks, num);
@@ -136,7 +147,7 @@ export class CodeBricklayer {
 								continue;
 							}
 
-							if (j < num) {
+							if (j < num && bricks[j] !== "") {
 								newBlk = newBlk.replace(id, bricks[j]);
 								match = true;
 							} else {
@@ -172,7 +183,7 @@ export class CodeBricklayer {
 		}
 	}
 
-	display() : string {
+	popContent() : string {
 		return this.dstContent;
 	}
 }
