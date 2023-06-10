@@ -1,0 +1,24 @@
+...
+/**
+ * @brief sdhc_sf_${a}($<${b}>$<, ${c}>)
+*/
+void sdhc_sf_${a}($<${b}>$<, ${c}>);
+
+...
+---
+/
+a/b/c
+intr_enable//en
+intr_clear
+intr_status
+intr_test/intr
+fatal_intr_set/intr
+sram_fault_stat/stat
+trans_timeout_monitor_set/en/timeout
+trans_timeout_intr_src_set/src
+trans_timeout_status
+trans_timeout_status_clear
+prot_fault_src_set/src
+prot_fault_status
+prot_fault_status_clear
+---

@@ -2,8 +2,8 @@
   "name": "code-bricklayer",
   "displayName": "code bricklayer",
   "description": "",
-  "version": "0.0.1",
-  "publisher": "siyuanliu",
+  "version": "1.0.0",
+  "publisher": "siyuanl96",
   "engines": {
     "vscode": "^1.76.0"
   },

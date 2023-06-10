@@ -1,71 +1,90 @@
-# code-bricklayer README
+## Introduction
 
-This is the README for your extension "code-bricklayer". After writing up a brief description, we recommend including the following sections.
+I designed this tool to reduce coding time, because I found some code with the same coding pattern.
 
-## Features
+## Usage
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+### Create A Blueprint
 
-For example if there is an image subfolder under your extension project workspace:
+#### Basic Architecture
 
-\!\[feature X\]\(images/feature-x.png\)
+```
+...
+abc ${hole} $<abc ${hole}>
+...
+---
+separator
+hole-set
+brick-set-0
+brick-set-1
+---
+```
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+- `...`
+  - The content between `...` is the structure of the house.
+  - `${}`
+    The content wrapped by `${}` describes a wall hole. The holes will be filled by fitting bricks. The `${hole}` will be replaced by the contents of the brick. You can refer to [Example A](#example-a) to understand the usage.
+  - `$<>`
+    The content wrapped by `$<>` describes a wall. `$<wall>` must wrap at least one `${hole}`. If all `${hole}` among them are not filled with any bricks, the `$<wall>` will be destroyed. You can refer to [Expample-B](#example-b) to understand the usage.
+- `---`
+  - The content between `---` describes the fitting relationship between holes and bricks.
+    - The first row specifies a **separator** for splitting the holes and bricks.
+    - The second row lists the holes wrapped by `${}`.
+    - The subsequent rows are the fitting relationship of bricks to holes. If you want to build more houses, then you should make more bricks sets.
 
-## Requirements
+#### Example A
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+##### Blueprint
 
-## Extension Settings
+```
+...
+${a} == ${b}
+...
+---
+,
+a,b
+1,2
+3,4
+---
+```
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
+##### Generated content
 
-For example:
+```
+1 == 2
+3 == 4
+```
 
-This extension contributes the following settings:
+#### Example B
 
-* `myExtension.enable`: Enable/disable this extension.
-* `myExtension.thing`: Set to `blah` to do something.
+##### Blueprint
+
+```
+...
+${a} $<== ${b}>
+...
+---
+,
+a,b
+1,2
+3
+---
+```
+
+##### Generated content
+
+```
+1 == 2
+3
+```
 
 ## Known Issues
 
-Calling out known issues can help limit users opening duplicate issues against your extension.
 
 ## Release Notes
 
-Users appreciate release notes as you update your extension.
-
 ### 1.0.0
 
-Initial release of ...
+Initial release of `codeBricklayer`.
 
-### 1.0.1
 
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
-
----
-
-## Following extension guidelines
-
-Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
-
-* [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
-
-## Working with Markdown
-
-You can author your README using Visual Studio Code. Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux).
-* Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux).
-* Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets.
-
-## For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**

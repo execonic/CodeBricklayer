@@ -100,7 +100,7 @@ export class CodeBricklayer {
 		if (separator === EOF) {
 			return;
 		}
-		separator = separator.replace("\n", "");
+		separator = separator.replace(/(\r)*\n/, "");
 		// console.log(separator);
 
 		/* Get the identifier of the brick */
@@ -148,10 +148,10 @@ export class CodeBricklayer {
 							}
 
 							if (j < num && bricks[j] !== "") {
-								newBlk = newBlk.replace(id, bricks[j]);
+								newBlk = newBlk.replaceAll(id, bricks[j]);
 								match = true;
 							} else {
-								newBlk = newBlk.replace(id, "");
+								newBlk = newBlk.replaceAll(id, "");
 							}
 						}
 						
@@ -170,11 +170,12 @@ export class CodeBricklayer {
 					let id = `\${${ids[i]}}`;
 					
 					if (i < num) {
-						code = code.replace(id, bricks[i]);
+						code = code.replaceAll(id, bricks[i]);
 					} else {
-						code = code.replace(id, "");
+						code = code.replaceAll(id, "");
 					}
 				}
+
 				this.dstContent += code;
 				// console.log(this.dstContent);
 			} else {
