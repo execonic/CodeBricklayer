@@ -1,3 +1,4 @@
+# Code Bricklayer
 ## Introduction
 
 I designed this tool to reduce coding time, because I found some code with the same coding pattern.
