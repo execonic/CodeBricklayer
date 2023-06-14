@@ -1,7 +1,7 @@
 # Code Bricklayer
 ## Introduction
 
-I designed this tool to reduce coding time, because I found some code with the same coding pattern.
+I designed this tool to reduce coding time, because I found some code with the same coding pattern. You can watch the video on [this page](https://pushmindstack.com/doku.php?id=opensource:codebricklayer:vscode-ext#demo_video) first to see if it meets your needs.
 
 ## Usage
 
