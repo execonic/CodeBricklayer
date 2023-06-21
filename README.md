@@ -1,7 +1,7 @@
 # Code Bricklayer
 ## Introduction
 
-I designed this tool to reduce coding time, because I found some code with the same coding pattern. You can watch the video on [this page](https://pushmindstack.com/doku.php?id=opensource:codebricklayer:vscode-ext#demo_video) first to see if it meets your needs.
+I designed this tool to reduce coding time, because I found some code with the same coding pattern. You can watch the [video](#demo-video) first to see if it meets your needs.
 
 ## Usage
 
@@ -78,6 +78,9 @@ a,b
 1 == 2
 3
 ```
+## Demo Video
+
+[demo](https://github.com/siyuanl96/CodeBricklayer/assets/27429124/5bb766dd-fae2-4320-8a88-da648fc00548)
 
 ## Known Issues
 
