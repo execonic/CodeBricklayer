@@ -10,10 +10,10 @@ import { EOF } from "dns";
 import { link } from "fs";
 
 const reLine = /.*(\r)*\n/;
-const reArchHead = /\.\.\./;
-const reArchTail = /\.\.\./;
-const reBrickHead = /---/;
-const reBrickTail = /---/;
+const reArchHead = /^\/\.\.\.\n/;
+const reArchTail = /^\.\.\.\/\n/;
+const reBrickHead = /^\/---\n/;
+const reBrickTail = /^---\/\n/;
 
 export class CodeBricklayer {
 
@@ -44,7 +44,7 @@ export class CodeBricklayer {
 		}
 
 		this.relay = this.relay.replace(reLine, "");
-		
+
 		return line[0];
 	}
 
@@ -117,7 +117,7 @@ export class CodeBricklayer {
 		while (true) {
 			line = this.readline();
 			line = line.replace("\n", "");
-			
+
 			if (line === EOF) {
 				break;
 			}
@@ -141,7 +141,7 @@ export class CodeBricklayer {
 
 						for (var j = 0; j < ids.length; j++) {
 							let id = `\${${ids[j]}}`;
-						
+
 							var exist = newBlk.indexOf(id);
 							if (exist < 0) {
 								continue;
@@ -154,7 +154,7 @@ export class CodeBricklayer {
 								newBlk = newBlk.replaceAll(id, "");
 							}
 						}
-						
+
 						if (!match) {
 							newBlk = "";
 						}
@@ -168,7 +168,7 @@ export class CodeBricklayer {
 
 				for (var i = 0; i < ids.length; i++) {
 					let id = `\${${ids[i]}}`;
-					
+
 					if (i < num) {
 						code = code.replaceAll(id, bricks[i]);
 					} else {

@@ -1,17 +1,17 @@
-...
+/...
 /**
  * @brief sdhc_sf_${a}($<${b}>$<, ${c}>)
 */
 void sdhc_sf_${a}($<${b}>$<, ${c}>);
 
-...
----
+.../
+/---
 /
 a/b/c
 intr_enable//en
 intr_clear
 intr_status
 intr_test/intr
----
+---/
 
 
